@@ -90,18 +90,30 @@ nltk.download('punkt')
 
 ## Usage
 
-1. Run the main script:
+1. Run the txt_summarization script:
 
 ```bash
 python txt_summarization.py
 ```
 
-2. The script will:
-   - Load the XSUM dataset
-   - Download and initialize models
-   - Generate summaries
-   - Calculate evaluation metrics
-   - Create a CSV file with results
+The script will:
+
+- Load the XSUM dataset
+- Download and initialize models
+- Generate summaries
+- Calculate evaluation metrics
+- Create a CSV file with results
+
+3. Run the topsis_evaluation script:
+
+```bash
+python topsis_evaluation.py
+```
+
+The script will:
+
+- Evaluate the topsis ranking of every model for respective domain
+- Print which model is best among them over all the domains
 
 ## Expected Output
 
