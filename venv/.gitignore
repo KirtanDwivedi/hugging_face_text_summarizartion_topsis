@@ -117,5 +117,6 @@ merged/
 Include/
 Lib/
 Scripts/
+share\man\man1
 pyvenv.cfg
 .DS_Store
