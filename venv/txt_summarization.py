@@ -60,27 +60,30 @@ meteor = evaluate.load("meteor")
 
 summaries = [summary1[0]['summary_text'], summary2[0]['summary_text'], summary3[0]['summary_text'], 
             summary4[0]['summary_text'], summary5[0]['summary_text']]
+domains= ['politics', 'science', 'sports', 'finance']
 
-with open('politics.csv', mode='w', newline='') as file:
-    writer = csv.writer(file)
-    writer.writerow(['Alternative', 'Criterion1', 'Criterion2', 'Criterion3', 'Criterion4', 'Criterion5', 'Criterion6'])
 
-    for i, generated_summary in enumerate(summaries):
+for domain in domains:
+    file_name = f"{domain}.csv"
+    with open(domain, mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(['Alternative', 'Criterion1', 'Criterion2', 'Criterion3', 'Criterion4', 'Criterion5', 'Criterion6'])
+
+        for i, generated_summary in enumerate(summaries):
+            domain_data = train_data.filter(lambda example: domain in example['document'].lower())
+            reference_summary = domain_data[0]['summary']
         
-        domain_data = train_data.filter(lambda example: 'politics' in example['document'].lower())
-        reference_summary = domain_data[0]['summary']
+            f1 = rouge.compute(predictions=[generated_summary], references=[reference_summary])
+            f2 = bleu.compute(predictions=[generated_summary.split()], references=[[reference_summary.split()]])
+            f3 = meteor.compute(predictions=[generated_summary], references=[reference_summary])
+            F1 = score([generated_summary], [reference_summary], lang="en")
+            f4 = F1[2].mean().item()
         
-        f1 = rouge.compute(predictions=[generated_summary], references=[reference_summary])
-        f2 = bleu.compute(predictions=[generated_summary.split()], references=[[reference_summary.split()]])
-        f3 = meteor.compute(predictions=[generated_summary], references=[reference_summary])
-        F1 = score([generated_summary], [reference_summary], lang="en")
-        f4 = F1[2].mean().item()
+            generated_length = len(generated_summary.split())
+            reference_length = len(reference_summary.split())
+            f5 = abs(generated_length - reference_length)
         
-        generated_length = len(generated_summary.split())
-        reference_length = len(reference_summary.split())
-        f5 = abs(generated_length - reference_length)
+            original_article_length = len(domain_data[0]['document'].split())
+            f6 = generated_length / original_article_length
         
-        original_article_length = len(domain_data[0]['document'].split())
-        f6 = generated_length / original_article_length
-        
-        writer.writerow([f'M{i+1}', f1['rouge1'], f2['bleu'], f3['meteor'], f4, f5, f6])
+            writer.writerow([f'M{i+1}', f1['rouge1'], f2['bleu'], f3['meteor'], f4, f5, f6])

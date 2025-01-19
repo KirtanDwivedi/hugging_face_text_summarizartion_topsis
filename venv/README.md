@@ -14,6 +14,13 @@ The project follows these key steps:
 4. Metric Calculation
 5. TOPSIS Ranking
 
+## List of Domains of xsum dataset
+
+1. Politics
+2. Science
+3. Sports
+4. Finance
+
 ## Models Evaluated
 
 - BART (facebook/bart-base)
@@ -76,9 +83,9 @@ nltk.download('punkt')
 
 ```
 .
-├── txt_summarization.py    # Main script for model evaluation
-├── requirements.txt        # Package dependencies
-└── README.md              # Project documentation
+├── txt_summarization.py    # Main script for model evaluation create the csv files of every domain
+├── topsis_evaluation       # Evaluate the topsis ranking of every model for respective domain and tell which model is best among them
+└── README.md               # Project documentation
 ```
 
 ## Usage
@@ -98,11 +105,29 @@ python txt_summarization.py
 
 ## Expected Output
 
-The script generates a CSV file (`politics.csv`) containing:
+### Expected Output from txt_summarization -
+
+The script generates CSV files (`politics.csv`, `science.csv`, `sports.csv`, `finance.csv`) containing:
 
 - Model alternatives (M1-M5)
 - Evaluation criteria scores
 - Final TOPSIS rankings
+
+### Expected Output from topsis_evaluation -
+
+The script generates result :
+
+```bash
+The best model for xsum dataset is : {most_frequent_best_model}
+```
+
+most_frequent_best_model are :
+
+- BART (facebook/bart-base)
+- PEGASUS (google/pegasus-xsum)
+- T5 (t5-small)
+- LongT5 (google/long-t5-tglobal-base)
+- LED (allenai/led-base-16384)
 
 ## Requirements
 
