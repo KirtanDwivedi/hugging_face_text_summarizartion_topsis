@@ -93,6 +93,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+share/    # Virtual environment share directory
 
 # Spyder project settings
 .spyderproject
@@ -117,6 +118,5 @@ merged/
 Include/
 Lib/
 Scripts/
-share/
 pyvenv.cfg
 .DS_Store

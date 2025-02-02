@@ -15,10 +15,10 @@ def topsis(data, weights, impacts):
 
     return topsis_scores
 
-file_names = ['politics.csv', 'science.csv', 'finance.csv', 'education.csv', 'sports.csv']
+file_names = ['politics.csv', 'technology.csv', 'health.csv', 'entertainment.csv']
 
-weights = [1, 1, 1, 1, 1]
-impacts = ['+', '+', '+', '-', '-']
+weights = [1, 1, 1, 1, 1, 1]
+impacts = ['+', '+', '+', '+', '-', '-']
 best_alternatives = {}
 
 for file_name in file_names:
@@ -28,7 +28,7 @@ for file_name in file_names:
     best_alternative = rank[rank == 1].index[0]
     best_alternatives[file_name] = best_alternative
 
-most_frequent_best = max(set(best_alternatives.values()), key=best_alternatives.values.count)
+most_frequent_best = max(set(best_alternatives.values()), key=list(best_alternatives.values()).count)
 
 def get_model_name(model_code):
   model_map = {
@@ -42,4 +42,4 @@ def get_model_name(model_code):
 
 most_frequent_best_model = get_model_name(most_frequent_best)
 
-print(f"The best model for xsum dataset is : {most_frequent_best_model}")
+print(f"The best model for cnn_dailymail dataset is : {most_frequent_best_model}")

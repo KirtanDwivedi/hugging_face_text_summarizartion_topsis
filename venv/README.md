@@ -2,7 +2,7 @@
 
 # Text Summarization Model Evaluation using TOPSIS
 
-This project evaluates different pre-trained models for text summarization using the TOPSIS (Technique for Order of Preference by Similarity to Ideal Solution) method. We analyze models across various domains (Sports, Politics, Finance, Science) from the XSUM dataset.
+This project evaluates different pre-trained models for text summarization using the TOPSIS (Technique for Order of Preference by Similarity to Ideal Solution) method. We analyze models across various domains (Politics, Technology, Health, Entertainment) from the cnn_dailymail dataset.
 
 ## Overview
 
@@ -14,17 +14,17 @@ The project follows these key steps:
 4. Metric Calculation
 5. TOPSIS Ranking
 
-## List of Domains of xsum dataset
+## List of Domains of cnn_dailymail dataset
 
 1. Politics
-2. Science
-3. Sports
-4. Finance
+2. Technology
+3. Health
+4. Entertainment
 
 ## Models Evaluated
 
 - BART (facebook/bart-base)
-- PEGASUS (google/pegasus-xsum)
+- PEGASUS (google/pegasus-cnn_dailymail)
 - T5 (t5-small)
 - LongT5 (google/long-t5-tglobal-base)
 - LED (allenai/led-base-16384)
@@ -119,7 +119,7 @@ The script will:
 
 ### Expected Output from txt_summarization -
 
-The script generates CSV files (`politics.csv`, `science.csv`, `sports.csv`, `finance.csv`) containing:
+The script generates CSV files (`politics.csv`, `technology.csv`, `health.csv`, `entertainment.csv`) containing:
 
 - Model alternatives (M1-M5)
 - Evaluation criteria scores
@@ -130,7 +130,7 @@ The script generates CSV files (`politics.csv`, `science.csv`, `sports.csv`, `fi
 The script generates result :
 
 ```bash
-The best model for xsum dataset is : {most_frequent_best_model}
+The best model for cnn_dailymail dataset is : {most_frequent_best_model}
 ```
 
 most_frequent_best_model are :
